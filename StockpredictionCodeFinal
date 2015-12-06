@@ -1,0 +1,78 @@
+
+require(quantmod) 
+getSymbols("SPY") 
+
+
+lengthh<-dim(SPY)
+
+
+b <- lengthh[1]
+
+
+#dim(SPY)
+#SPY[2148:2248,]
+
+#dim(SPY[c:b,])
+
+
+
+#pe<-1
+green <- vector()
+red <- vector()
+
+for(i in 1:100){   
+  c<- (b - (100-i))
+c
+b
+  j <- seriesHi(SPY[c:b]) 
+  j
+  index(j)
+  dim(j)
+  j[,0]
+  
+  class(j[,0])
+  diff<-  as.Date("2015-12-05") - index(j);    # j[,0] #07-20 is hi aka j
+  diff
+  weekends<-(diff/7)*2
+  totalDays<-diff-weekends
+  green[i]<-100-totalDays
+  #green
+  
+  j2<-seriesLo(SPY[c:b])
+  j2
+  diff<-  as.Date("2015-12-05") - index(j2); #as.Date("2015-08-24")  #08-24 is low aka j2
+  diff
+  weekends<-(diff/7)*2
+  totalDays<-diff-weekends
+  red[i]<-100-totalDays
+  #red
+  #print(i);
+  c=c-1; 
+  #plot(green, red)
+  #pe
+  #pe <- pe+1
+}
+
+pe<-c(1:100)
+
+chartSeries(SPY[2148:2248], show.grid = TRUE , type='line', up.col='gold') 
+
+#FOR FACE BOOK 803:893
+
+
+
+#plot(pe, red,col="red", type="l", xlim=c(0,100), ylim=c(20,110) )
+par(new=TRUE)
+lines(pe,red,col="red")
+#UNCOMMENT ABOVE(PLOT), THEN DELETE ABOVE PAR(NEW=TRUE), THEN YOU ARE GOOD TO GO
+par(new=TRUE)
+lines(pe, green, col="green")
+
+
+
+
+
+
+#newEMA <- newTA(EMA, Cl, on=1, col=7)
+#newEMA()
+#newEMA(on=NA, col=5)
